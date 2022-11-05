@@ -1,0 +1,72 @@
+p#notice = notice
+
+- if @ticket.closed_at.nil?
+  = link_to 'Yes, close this ticket!', {:controller => 'tickets', action: 'update', ticket: { 'closed_at(1i)' => Time.now.utc.year, 'closed_at(2i)'=>Time.now.utc.month, 'closed_at(3i)'=>Time.now.utc.day, 'closed_at(4i)'=>Time.now.utc.hour, 'closed_at(5i)'=>Time.now.utc.min } }, :method => 'patch'
+
+p
+  strong Text:
+  = @ticket.text
+p
+  strong Project:
+  = @ticket.project.name if @ticket.project.present?
+p
+  strong Category:
+  = @ticket.category.name if @ticket.category.present?
+/p
+  strong Closed:
+  = @ticket.closed
+- closed_date=@ticket.closed_at if @ticket.closed_at.present?
+- if closed_date.present?
+  p
+    strong Closed at:
+    span class='datetime' = @ticket.closed_at
+p
+  strong Status:
+  /= Ticket::STATUS[@ticket.status].to_s.humanize if @ticket.status.present?
+  - status = Ticket::STATUS[0].to_s.humanize
+  - if closed_date.present?
+    - status = Ticket::STATUS[1].to_s.humanize
+  = status
+p
+  strong Link:
+  = @ticket.link
+p
+  - if @ticket.attachments.present?
+    strong Attachments:
+    - @ticket.attachments.map.each do |attachment|
+      = link_to attachment.filename.to_s.split('/').last, attachment.filename.url
+
+h2 Answers
+- @ticket.answers.each do |answer|
+  p
+    strong Text:
+    = answer.text
+  p
+    strong User:
+    = answer.user.email
+
+  - if answer.attachments.present?
+    p
+      strong Attachments:
+      - answer.attachments.map.each do |attachment|
+        = attachment.filename.url
+
+- if @ticket.closed_at.nil?
+  h2 Add an answer:
+
+  = form_for([@ticket, @ticket.answers.build]) do |f|
+    p
+      .field
+        = f.label :text
+        = f.text_area :text
+      .field
+        = f.label :attachments
+        -  2.times { @ticket.answers.last.attachments.build }
+        = f.fields_for :attachments do |attachment|
+          - if attachment.object.new_record?
+            = attachment.file_field :filename
+    .actions = f.submit
+
+  = link_to 'Edit', edit_ticket_path(@ticket)
+  '|
+= link_to 'Back', tickets_path

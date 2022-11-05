@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket_id: 
+  key: MyString
+  used_at: 2016-01-19 15:24:23
+  expired_at: 2016-01-19 15:24:23
+  ip: MyString
+  email: MyString
+
+two:
+  ticket_id: 
+  key: MyString
+  used_at: 2016-01-19 15:24:23
+  expired_at: 2016-01-19 15:24:23
+  ip: MyString
+  email: MyString

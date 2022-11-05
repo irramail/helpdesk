@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HelpDesk</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/application_nav' %>
+
+
+<div id="wrap">
+  <div id="main.clear-top">
+    <div class="container-fluid"><br /><br /><br />
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <%= yield %>
+    </div>
+  </div>
+</div>
+<script src="/api/widget.js?rand=3453453453"></script>
+</body>
+</html>

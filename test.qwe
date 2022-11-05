@@ -1,0 +1,6 @@
+xconn	<All>	TCP	55555	22	192.168.0.9	
+virt	<All>	TCP	22	22	192.168.0.91	
+http	<All>	TCP	80	80	192.168.0.99	
+testasd	<All>	TCP	8080	80	192.168.0.3	
+http91	<All>	TCP	3000	3000	192.168.0.91
+

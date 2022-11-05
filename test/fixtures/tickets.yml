@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyText
+  project_id: 
+  category_id: 
+  closed: false
+  closed_at: 2016-01-19 15:12:16
+  status: 1
+  link: MyString
+  attachment_id: 
+
+two:
+  text: MyText
+  project_id: 
+  category_id: 
+  closed: false
+  closed_at: 2016-01-19 15:12:16
+  status: 1
+  link: MyString
+  attachment_id: 

@@ -1,0 +1,33 @@
+h1 Listing tickets
+
+table class="table table-striped table-condensed"
+  thead
+    tr
+      th ID
+      th Text
+      th Project
+      th Category
+      th Status
+      th Created at
+      th
+
+  tbody
+    - @tickets.each do |ticket|
+      - if ticket.project.present? && ticket.project.users.first == current_user
+        tr
+          - closed_date=ticket.closed_at if ticket.closed_at.present?
+          td = link_to ticket.id.to_s, ticket, { class: 'datetime-title', title: closed_date}
+          / Fix 32 to const
+          td = ticket.text[0..32] + ((ticket.text.length > 32)? '...':'')
+          td = ticket.project.name if ticket.project.present?
+          td = ticket.category.name if ticket.category.present?
+          td class="datetime-title" title=closed_date
+            - status = Ticket::STATUS[0].to_s.humanize
+            - if closed_date.present?
+              - status = Ticket::STATUS[1].to_s.humanize
+            = status
+          td class='datetime' = ticket.created_at
+          td = link_to 'Destroy', ticket, data: {:confirm => 'Are you sure?'}, :method => :delete
+= paginate @tickets
+br
+= link_to 'New Ticket', new_ticket_path

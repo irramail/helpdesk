@@ -1,0 +1,20 @@
+p#notice = notice
+
+p
+  strong Text:
+  = @answer.text
+p
+  strong User:
+  = @answer.user
+p
+  strong Attachments:
+  - if @answer.attachments.present?
+    - @answer.attachments.map.each do |attachment|
+      = attachment.filename.url
+p
+  strong Ticket:
+  = @answer.ticket
+
+= link_to 'Edit', edit_answer_path(@answer)
+'|
+= link_to 'Back', answers_path

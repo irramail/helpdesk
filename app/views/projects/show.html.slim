@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @project.name
+p
+  strong Link:
+  = @project.link
+p
+  strong Users:
+  = collection_select :users, :user_ids, @project.users, :id, :email, {}, { multiple: true, disabled: true }
+
+= link_to 'Edit', edit_project_path(@project)
+'|
+= link_to 'Back', projects_path

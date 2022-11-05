@@ -1,0 +1,24 @@
+# To enable smtp email delivery for your Juggle instance do the following:
+# 1. Rename this file to smtp_settings.rb
+# 2. Edit settings inside this file
+# 3. Restart Juggle instance
+#
+# For full list of options and their values see http://api.rubyonrails.org/classes/ActionMailer/Base.html
+
+=begin
+if Rails.env.production?
+  Juggle::Application.config.action_mailer.delivery_method = :smtp
+  Juggle::Application.config.action_mailer.default_url_options = { :host => 'http://server.com' }
+
+  ActionMailer::Base.smtp_settings = {
+    address: "email.server.com",
+    port: 456,
+    user_name: "smtp",
+    password: "123456",
+    domain: "juggle.company.com",
+    authentication: :plain,
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'peer' # See ActionMailer documentation for other possible options
+  }
+end
+=end

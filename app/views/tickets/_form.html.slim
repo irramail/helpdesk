@@ -1,0 +1,35 @@
+= form_for @ticket do |f|
+  - if @ticket.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@ticket.errors.count, "error")} prohibited this ticket from being saved:"
+      ul
+        - @ticket.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :text
+    = f.text_area :text
+  .field
+    = f.label :project
+    = f.collection_select :project_id, Project.all, :id, :name
+  .field
+    = f.label :category
+    = f.collection_select :category_id, Category.all, :id, :name
+  /.field
+    = f.label :closed
+    = f.check_box :closed
+  /.field
+    = f.label :closed_at
+    = f.datetime_select :closed_at
+  /.field
+    = f.label :status
+    = f.select :status, Ticket::STATUS.map { |status| [ status.to_s.humanize, Ticket::STATUS.index(status) ] }
+  .field
+    = f.label :link
+    = f.text_field :link
+  .field
+    = f.label :attachments
+    = f.fields_for :attachments do |attachment|
+      - if attachment.object.new_record?
+        = attachment.file_field :filename
+  .actions = f.submit
